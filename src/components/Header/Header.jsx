@@ -1,4 +1,6 @@
 import { useState } from "react";
+import * as S from "./Header.styled.js";
+import { Container } from "../../style/common.style.js";
 
 function Header({ setCards, cards }) {
   const [toggle, setToggel] = useState(false);
@@ -20,47 +22,48 @@ function Header({ setCards, cards }) {
   }
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
+    <S.Header>
+      <Container>
+        <S.HeaderBlock>
+          <S.HeaderLogo>
             <a href="" target="_self">
-              <img src="images/logo.png" alt="logo" />
+              <img src="images/logo.png" alt="SKYPRO" />
             </a>
-          </div>
-          <div className="header__logo _dark">
+          </S.HeaderLogo>
+          {/*<S.HeaderLogo>
             <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="logo" />
+              <img src="images/logo_dark.png" alt="SKYPRO" />
             </a>
-          </div>
-          <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
-              <a onClick={addCard}>Создать новую задачу</a>
-            </button>
-            <a className="header__user _hover02" onClick={handleToggle}>
-              Ivan Ivanov
-            </a>
+          </S.HeaderLogo>*/}
+          <S.HeaderNav>
+            {/*<Button $testprops $size="medium">
+                Click
+              </Button>
+              <DangerButton>Хелп</DangerButton>*/}
+            <S.HeaderBtn onClick={addCard} id="btnMainNew">
+              <a>Создать новую задачу</a>
+            </S.HeaderBtn>
+            <S.HeaderUser onClick={handleToggle}>Ivan Ivanov</S.HeaderUser>
             {toggle && (
-              <div
-                className="header__pop-user-set pop-user-set"
-                id="user-set-target"
-              >
+              <S.HeaderPopUserSet id="user-set-target">
                 {/* <a href="">x</a> */}
-                <p className="pop-user-set__name">Ivan Ivanov</p>
-                <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-                <div className="pop-user-set__theme">
+                <S.HeaderPopUserSetName>Ivan Ivanov</S.HeaderPopUserSetName>
+                <S.HeaderPopUserSetMail>
+                  ivan.ivanov@gmail.com
+                </S.HeaderPopUserSetMail>
+                <S.HeaderPopUserSetTheme>
                   <p>Темная тема</p>
                   <input type="checkbox" className="checkbox" name="checkbox" />
-                </div>
-                <button type="button" className="_hover03">
+                </S.HeaderPopUserSetTheme>
+                <S.HeaderBtnExit>
                   <a href="#popExit">Выйти</a>
-                </button>
-              </div>
+                </S.HeaderBtnExit>
+              </S.HeaderPopUserSet>
             )}
-          </nav>
-        </div>
-      </div>
-    </header>
+          </S.HeaderNav>
+        </S.HeaderBlock>
+      </Container>
+    </S.Header>
   );
 }
 
