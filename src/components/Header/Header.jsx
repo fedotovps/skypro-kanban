@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as S from "./Header.styled.js";
 import { Container } from "../../style/common.style.js";
+import { Link } from "react-router-dom";
 
 function Header({ setCards, cards }) {
   const [toggle, setToggel] = useState(false);
@@ -26,9 +27,9 @@ function Header({ setCards, cards }) {
       <Container>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="" target="_self">
+            <Link to="/">
               <img src="images/logo.png" alt="SKYPRO" />
-            </a>
+            </Link>
           </S.HeaderLogo>
           {/*<S.HeaderLogo>
             <a href="" target="_self">
@@ -56,7 +57,7 @@ function Header({ setCards, cards }) {
                   <input type="checkbox" className="checkbox" name="checkbox" />
                 </S.HeaderPopUserSetTheme>
                 <S.HeaderBtnExit>
-                  <a href="#popExit">Выйти</a>
+                  <Link to="/exit">Выйти</Link>
                 </S.HeaderBtnExit>
               </S.HeaderPopUserSet>
             )}
