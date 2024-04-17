@@ -5,7 +5,6 @@ export const cardList = [
     title: "Изучить урок по хукам",
     date: "30.10.2023",
     status: "Без статуса",
-    theme: "_green",
   },
   {
     id: 2,
@@ -13,7 +12,6 @@ export const cardList = [
     title: "Посмотреть разбор ДЗ",
     date: "20.12.2023",
     status: "Нужно сделать",
-    theme: "_orange",
   },
   {
     id: 3,
@@ -21,7 +19,6 @@ export const cardList = [
     title: "Сделать все доп. задания",
     date: "12.12.2023",
     status: "В работе",
-    theme: "_purple",
   },
   {
     id: 4,
@@ -29,7 +26,6 @@ export const cardList = [
     title: "Выполнить домашку",
     date: "01.02.2024",
     status: "Тестирование",
-    theme: "_green",
   },
   {
     id: 5,
@@ -37,7 +33,6 @@ export const cardList = [
     title: "Сдать домашку",
     date: "30.02.2024",
     status: "Готово",
-    theme: "_orange",
   },
 ];
 
