@@ -2,8 +2,9 @@ import { Link, useParams } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
 
-function PopBrowse() {
+function PopBrowse(cards) {
   const { id } = useParams();
+  //const indexCard = cards.findIndex(item => item._id === id);
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">

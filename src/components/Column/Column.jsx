@@ -9,7 +9,7 @@ function Column({ title, cards }) {
       </S.ColumnTitle>
       <S.Cards>
         {cards.map((card) => (
-          <Card key={card.id} {...card} />
+          <Card key={card._id} {...card} />
         ))}
       </S.Cards>
     </S.Column>

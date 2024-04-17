@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import * as S from "./Card.styled";
 
-function Card({ topic, title, date, id }) {
+function Card({ topic, title, date, _id }) {
   let color;
   switch (topic) {
     case "Research":
@@ -23,7 +23,7 @@ function Card({ topic, title, date, id }) {
           <S.CardTheme $theme={color}>
             <p>{topic}</p>
           </S.CardTheme>
-          <Link to={`/card/${id}`}>
+          <Link to={`/card/${_id}`}>
             <S.CardBtn>
               <div></div>
               <div></div>

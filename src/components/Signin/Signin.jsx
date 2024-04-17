@@ -1,12 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./Signin.styled";
 import { paths } from "../../lib/paths";
+import { loginUser } from "../../lib/api";
+import { useState } from "react";
 
-function Signin({ setIsAuth }) {
-  const navigete = useNavigate();
-  function login() {
-    setIsAuth(true);
-    navigete(paths.MAIN);
+function Signin({ login }) {
+
+  const [getLogin, setGetLogin] = useState("");
+  const [getPassword, setGetPassword] = useState("");
+  const [isError, setIsError] = useState(null);
+  const onClickSignIn = async() => {    
+    await loginUser(getLogin, getPassword).then((response) => {
+      login(response.user);
+    }).catch((error) => {
+      setIsError(error.message);
+    })
+    
   }
   return (
     <S.ContainerSignin>
@@ -21,14 +30,19 @@ function Signin({ setIsAuth }) {
               name="login"
               id="formlogin"
               placeholder="Эл. почта"
+              value={getLogin}
+              onChange={(e) => {setGetLogin(e.target.value)}}
             />
             <S.ModalInput
               type="password"
               name="password"
               id="formpassword"
               placeholder="Пароль"
+              value={getPassword}
+              onChange={(e) => {setGetPassword(e.target.value)}}
             />
-            <S.ModalBtnEnter id="btnEnter" onClick={login}>
+            <span style={{color: "red", marginTop: "10px"}}>{isError}</span>
+            <S.ModalBtnEnter type="button" id="btnEnter" onClick={onClickSignIn}>
               Войти
             </S.ModalBtnEnter>
             <S.ModalFormGroup>

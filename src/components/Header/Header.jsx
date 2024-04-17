@@ -3,7 +3,7 @@ import * as S from "./Header.styled.js";
 import { Container } from "../../style/common.style.js";
 import { Link } from "react-router-dom";
 
-function Header({ setCards, cards }) {
+function Header({ setCards, cards, user }) {
   const [toggle, setToggel] = useState(false);
 
   const handleToggle = () => {
@@ -44,11 +44,11 @@ function Header({ setCards, cards }) {
             <S.HeaderBtn onClick={addCard} id="btnMainNew">
               <a>Создать новую задачу</a>
             </S.HeaderBtn>
-            <S.HeaderUser onClick={handleToggle}>Ivan Ivanov</S.HeaderUser>
+            <S.HeaderUser onClick={handleToggle}>{user.name}</S.HeaderUser>
             {toggle && (
               <S.HeaderPopUserSet id="user-set-target">
                 {/* <a href="">x</a> */}
-                <S.HeaderPopUserSetName>Ivan Ivanov</S.HeaderPopUserSetName>
+                <S.HeaderPopUserSetName>{user.name}</S.HeaderPopUserSetName>
                 <S.HeaderPopUserSetMail>
                   ivan.ivanov@gmail.com
                 </S.HeaderPopUserSetMail>
