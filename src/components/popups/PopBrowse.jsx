@@ -54,7 +54,7 @@ function PopBrowse({cards}) {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
-                  >{title}</textarea>
+                  ></textarea>
                 </div>
               </form>
               <Calendar />
