@@ -31,6 +31,7 @@ const AppRoutes = () => {
   useEffect(() => {
     getTasks(isAuth.token).then((responce) => {
       setCards(responce.tasks);
+      console.log(cards);
     })
     .catch((error) => {
       setAddErrorGetTasks(error.message);
