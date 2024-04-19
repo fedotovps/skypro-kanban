@@ -3,14 +3,28 @@ import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { getTasks } from "../lib/api";
 
-function MainPage({isLoading, addErrorGetTasks, cards, setCards, user}) {
+function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTasks, cards, setCards, isAuth}) {
+
+  useEffect(() => {
+    getTasks(isAuth.token).then((responce) => {
+      setCards(responce.tasks);
+      console.log(cards);
+    })
+    .catch((error) => {
+      setAddErrorGetTasks(error.message);
+    }).finally(() => {
+      setIsLoading(false);
+    })
+}, []);
 
     return (    
       <>
         <GlobalStyle />
         <Wrapper>
-          <Header setCards={setCards} cards={cards} user={user} />
+          <Header setCards={setCards} cards={cards} user={isAuth} />
           {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
           {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
         </Wrapper>

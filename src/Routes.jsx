@@ -28,35 +28,29 @@ const AppRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [addErrorGetTasks, setAddErrorGetTasks] = useState(null);
 
-  useEffect(() => {
-    getTasks(isAuth.token).then((responce) => {
-      setCards(responce.tasks);
-      console.log(cards);
-    })
-    .catch((error) => {
-      setAddErrorGetTasks(error.message);
-    }).finally(() => {
-      setIsLoading(false);
-    })
-  }, []);
+
+
+  
+  
 
   function login(user) {
     localStorage.setItem("user", JSON.stringify(user));
-    setIsAuth(user);
     navigete(paths.MAIN);
+    setIsAuth(user);
   }
 
   function logout() {
     localStorage.removeItem("user")
-    setIsAuth(null);
     navigete(paths.SIGN_IN);
+    setIsAuth(null);
+    setCards([]);
   }
 
   
   return (
     <Routes>
       <Route element={<Layout isAuth={isAuth} />}>
-        <Route path={paths.MAIN} element={<MainPage user={isAuth} cards={cards} setCards={setCards} isLoading={isLoading} addErrorGetTasks={addErrorGetTasks} />}>
+        <Route path={paths.MAIN} element={<MainPage isAuth={isAuth} cards={cards} setCards={setCards} isLoading={isLoading} addErrorGetTasks={addErrorGetTasks} setAddErrorGetTasks={setAddErrorGetTasks} setIsLoading={setIsLoading} />}>
           <Route
             path={paths.EXIT}
             element={<ExitPage logout={logout} />}
