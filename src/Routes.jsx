@@ -1,5 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Layout2 from "./components/Layout2/Layout2";
 import MainPage from "./pages/MainPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -7,8 +8,7 @@ import CardPage from "./pages/CardPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { paths } from "./lib/paths";
 import ExitPage from "./pages/ExitPage";
-import { useEffect, useState } from "react";
-import { getTasks } from "./lib/api";
+import { useState } from "react";
 
 const checkLS = () => {
   try {
@@ -28,11 +28,6 @@ const AppRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [addErrorGetTasks, setAddErrorGetTasks] = useState(null);
 
-
-
-  
-  
-
   function login(user) {
     localStorage.setItem("user", JSON.stringify(user));
     navigete(paths.MAIN);
@@ -46,7 +41,6 @@ const AppRoutes = () => {
     setCards([]);
   }
 
-  
   return (
     <Routes>
       <Route element={<Layout isAuth={isAuth} />}>
@@ -59,6 +53,7 @@ const AppRoutes = () => {
         </Route>
       </Route>
 
+      <Route element={<Layout2 isAuth={isAuth} />}>
       <Route
         path={paths.SIGN_IN}
         element={<SignInPage login={login} />}
@@ -67,7 +62,8 @@ const AppRoutes = () => {
         path={paths.SIGN_UP}
         element={<SignUpPage login={login} />}
       />
-
+      </Route>
+      
       <Route path={paths.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
   );
