@@ -2,8 +2,11 @@ import { Link, useParams } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
 
-function PopBrowse() {
+function PopBrowse({cards}) {
+  
   const { id } = useParams();
+  const indexCard = cards.findIndex(item => item._id === id);
+  const {date, description, status, title, topic, userId, _id} = cards[indexCard];
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
@@ -12,7 +15,7 @@ function PopBrowse() {
             <div className="pop-browse__top-block">
               <h3 className="pop-browse__ttl">Задача №{id}</h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{topic}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
@@ -22,7 +25,7 @@ function PopBrowse() {
                   <p>Без статуса</p>
                 </div>
                 <div className="status__theme _gray">
-                  <p className="_gray">Нужно сделать</p>
+                  <p className="_gray">{status}</p>
                 </div>
                 <div className="status__theme _hide">
                   <p>В работе</p>

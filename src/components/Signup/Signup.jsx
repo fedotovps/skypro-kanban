@@ -1,12 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./Signup.styled";
 import { paths } from "../../lib/paths";
+import { useState } from "react";
+import { regUser } from "../../lib/api";
 
-function Signup({ setIsAuth }) {
-  const navigate = useNavigate();
-  function login() {
-    setIsAuth(true);
-    navigate(paths.MAIN);
+function Signup({ login }) {
+  const [getFirstName, setGetFirstName] = useState("");
+  const [getLogin, setGetLogin] = useState("");
+  const [getPassword, setGetPassword] = useState("");
+  const [isError, setIsError] = useState(null);
+
+  const onClickSignUp = async () => {
+    await regUser(getLogin, getPassword, getFirstName).then((response) => {
+      login(response.user)
+    }).catch((error) => {
+      setIsError(error.message);
+    });
   }
   return (
     <S.ContainerSignup>
@@ -21,20 +30,27 @@ function Signup({ setIsAuth }) {
               name="first-name"
               id="first-name"
               placeholder="Имя"
+              value={getFirstName}
+              onChange={(e) => {setGetFirstName(e.target.value)}}
             ></S.ModalInput>
             <S.ModalInput
               type="text"
               name="login"
               id="loginReg"
               placeholder="Эл. почта"
+              value={getLogin}
+              onChange={(e) => {setGetLogin(e.target.value)}}
             ></S.ModalInput>
             <S.ModalInput
               type="password"
               name="password"
               id="passwordFirst"
               placeholder="Пароль"
+              value={getPassword}
+              onChange={(e) => {setGetPassword(e.target.value)}}
             ></S.ModalInput>
-            <S.ModalBtnSignupEnt id="SignUpEnter" onClick={login}>
+            <span style={{color: "red", marginTop: "10px"}}>{isError}</span>
+            <S.ModalBtnSignupEnt type="button" id="SignUpEnter" onClick={onClickSignUp}>
               Зарегистрироваться
             </S.ModalBtnSignupEnt>
             <S.ModalFormGroup>

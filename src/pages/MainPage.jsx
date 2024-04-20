@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
 import "../App.css";
 import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
-import { cardList } from "../lib/data";
 import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import { getTasks } from "../lib/api";
 
-function MainPage() {
-  const [cards, setCards] = useState(cardList);
-  const [isLoading, setIsLoading] = useState(true);
+function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTasks, cards, setCards, isAuth}) {
 
   useEffect(() => {
-    setTimeout(() => {
+    getTasks(isAuth.token).then((responce) => {
+      setCards(responce.tasks);
+      console.log(cards);
+    })
+    .catch((error) => {
+      setAddErrorGetTasks(error.message);
+    }).finally(() => {
       setIsLoading(false);
-    }, 2000);
-  }, []);
+    })
+}, []);
 
-  useEffect(() => {
-    getTasks().then((tasks) => {
-      setCards(tasks.cards);
-    });
-  }, []);
-  return (
-    <>
-      <GlobalStyle />
-      <Wrapper>
-        <Header setCards={setCards} cards={cards} />
-        {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
-      </Wrapper>
-      <Outlet />
-    </>
-  );
+    return (    
+      <>
+        <GlobalStyle />
+        <Wrapper>
+          <Header setCards={setCards} cards={cards} user={isAuth} />
+          {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
+          {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
+        </Wrapper>
+        <Outlet />
+      </>
+    );
+  
 }
 
 export default MainPage;
