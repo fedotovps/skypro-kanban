@@ -9,6 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { paths } from "./lib/paths";
 import ExitPage from "./pages/ExitPage";
 import { useState } from "react";
+import { UserContext } from "./contexts/UserContext";
 
 const checkLS = () => {
   try {
@@ -43,8 +44,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route element={<Layout isAuth={isAuth} />}>
-        <Route path={paths.MAIN} element={<MainPage isAuth={isAuth} cards={cards} setCards={setCards} isLoading={isLoading} addErrorGetTasks={addErrorGetTasks} setAddErrorGetTasks={setAddErrorGetTasks} setIsLoading={setIsLoading} />}>
+      <Route element={<UserContext.Provider value={{isAuth}}><Layout /></UserContext.Provider>}>
+        <Route path={paths.MAIN} element={<MainPage cards={cards} setCards={setCards} isLoading={isLoading} addErrorGetTasks={addErrorGetTasks} setAddErrorGetTasks={setAddErrorGetTasks} setIsLoading={setIsLoading} />}>
           <Route
             path={paths.EXIT}
             element={<ExitPage logout={logout} />}

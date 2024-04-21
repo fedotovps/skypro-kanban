@@ -5,8 +5,11 @@ import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { getTasks } from "../lib/api";
+import { useUserContext } from "../contexts/UserContext";
 
-function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTasks, cards, setCards, isAuth}) {
+function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTasks, cards, setCards}) {
+
+  const {isAuth} = useUserContext();
 
   useEffect(() => {
     getTasks(isAuth.token).then((responce) => {
@@ -24,7 +27,7 @@ function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTask
       <>
         <GlobalStyle />
         <Wrapper>
-          <Header setCards={setCards} cards={cards} user={isAuth} />
+          <Header setCards={setCards} cards={cards} />
           {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
           {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
         </Wrapper>
