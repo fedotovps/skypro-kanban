@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { paths } from "../../lib/paths";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/hooks/useUser";
 
 function Layout() {
-  const {isAuth} = useUserContext();
-  return isAuth ? <Outlet /> : <Navigate to={paths.SIGN_IN} />;
+  const {user} = useUserContext();
+  return user ? <Outlet /> : <Navigate to={paths.SIGN_IN} />;
 }
 
 export default Layout;

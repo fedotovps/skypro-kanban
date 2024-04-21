@@ -3,9 +3,11 @@ import * as S from "./Signin.styled";
 import { paths } from "../../lib/paths";
 import { loginUser } from "../../lib/api";
 import { useState } from "react";
+import { useUserContext } from "../../contexts/hooks/useUser";
 
-function Signin({ login }) {
+function Signin() {
 
+  const {login} = useUserContext();
   const [getLogin, setGetLogin] = useState("");
   const [getPassword, setGetPassword] = useState("");
   const [isError, setIsError] = useState(null);

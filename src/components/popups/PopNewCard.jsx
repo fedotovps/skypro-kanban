@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
+import { paths } from "../../lib/paths";
 
 function PopNewCard() {
   return (
@@ -8,7 +10,7 @@ function PopNewCard() {
           <div className="pop-new-card__content">
             <h3 className="pop-new-card__ttl">Создание задачи</h3>
             <a href="#" className="pop-new-card__close">
-              &#10006;
+              <Link to={paths.MAIN}>&#10006;</Link>
             </a>
             <div className="pop-new-card__wrap">
               <form

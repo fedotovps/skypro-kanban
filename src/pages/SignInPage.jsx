@@ -1,12 +1,12 @@
 import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
 import Signin from "../components/Signin/Signin";
 
-function SignInPage({ login }) {
+function SignInPage() {
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <Signin login={login} />
+        <Signin />
       </Wrapper>
     </>
   );

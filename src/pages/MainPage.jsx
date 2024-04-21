@@ -3,16 +3,20 @@ import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
 import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getTasks } from "../lib/api";
-import { useUserContext } from "../contexts/UserContext";
+import { useUserContext } from "../contexts/hooks/useUser";
 
-function MainPage({isLoading, setIsLoading, addErrorGetTasks, setAddErrorGetTasks, cards, setCards}) {
+function MainPage() {
 
-  const {isAuth} = useUserContext();
+  const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [addErrorGetTasks, setAddErrorGetTasks] = useState(null);
+
+  const {user} = useUserContext();
 
   useEffect(() => {
-    getTasks(isAuth.token).then((responce) => {
+    getTasks(user.token).then((responce) => {
       setCards(responce.tasks);
       console.log(cards);
     })

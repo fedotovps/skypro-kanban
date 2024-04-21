@@ -25,8 +25,9 @@ export async function regUser(login, password, name) {
     }),
   });
 
-  if (response.status === 400) {
-    throw new Error("Пользователь с таким логином уже существует")
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error);
   }
 
   const data = await response.json();

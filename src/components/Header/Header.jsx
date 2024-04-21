@@ -2,11 +2,12 @@ import { useState } from "react";
 import * as S from "./Header.styled.js";
 import { Container } from "../../style/common.style.js";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../../contexts/UserContext.jsx";
+import { paths } from "../../lib/paths.js";
+import { useUserContext } from "../../contexts/hooks/useUser.jsx";
 
 function Header({ setCards, cards }) {
 
-  const {isAuth} = useUserContext();
+  const {user} = useUserContext();
 
   const [toggle, setToggel] = useState(false);
 
@@ -45,14 +46,14 @@ function Header({ setCards, cards }) {
                 Click
               </Button>
               <DangerButton>Хелп</DangerButton>*/}
-            <S.HeaderBtn onClick={addCard} id="btnMainNew">
-              <a>Создать новую задачу</a>
+            <S.HeaderBtn id="btnMainNew">
+              <Link to={paths.NEWCARD}>Создать новую задачу</Link>
             </S.HeaderBtn>
-            <S.HeaderUser onClick={handleToggle}>{isAuth.name}</S.HeaderUser>
+            <S.HeaderUser onClick={handleToggle}>{user.name}</S.HeaderUser>
             {toggle && (
               <S.HeaderPopUserSet id="user-set-target">
                 {/* <a href="">x</a> */}
-                <S.HeaderPopUserSetName>{isAuth.name}</S.HeaderPopUserSetName>
+                <S.HeaderPopUserSetName>{user.name}</S.HeaderPopUserSetName>
                 <S.HeaderPopUserSetMail>
                   ivan.ivanov@gmail.com
                 </S.HeaderPopUserSetMail>
