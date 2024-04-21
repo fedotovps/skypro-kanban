@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
+import { useState } from "react";
 
 function PopNewCard() {
+  const [selectedDay, setSelectedDay] = useState();
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    topic: "",
+  });
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
@@ -29,6 +36,7 @@ function PopNewCard() {
                     id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus
+                    onChange={(e) => {setNewTask({...newTask, title: e.target.value})}}
                   />
                 </div>
                 <div className="form-new__block">
@@ -40,14 +48,16 @@ function PopNewCard() {
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
+                    value={newTask}
+                    onChange={(e) => {setNewTask({...newTask, description: e.target.value})}}
                   ></textarea>
                 </div>
               </form>
-              <Calendar />
+              <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
             </div>
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
-              <div className="categories__themes">
+              {/* <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
                 </div>
@@ -57,7 +67,7 @@ function PopNewCard() {
                 <div className="categories__theme _purple">
                   <p className="_purple">Copywriting</p>
                 </div>
-              </div>
+              </div> */}
             </div>
             <button className="form-new__create _hover01" id="btnCreate">
               Создать задачу

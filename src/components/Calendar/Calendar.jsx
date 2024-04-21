@@ -1,11 +1,9 @@
 import { ru } from 'date-fns/locale';
-import React, { useState } from 'react';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 
-function Calendar() {
-  const [selectedDay, setSelectedDay] = useState();
+function Calendar({selectedDay, setSelectedDay}) {
 
   const footer = selectedDay ? (
     <p>Ты выбрал {format(selectedDay, 'PPP', {locale: ru})}</p>
