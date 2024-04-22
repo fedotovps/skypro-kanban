@@ -6,10 +6,11 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTasks } from "../lib/api";
 import { useUserContext } from "../contexts/hooks/useUser";
+import { useTaskContext } from "../contexts/hooks/useCards";
 
 function MainPage() {
 
-  const [cards, setCards] = useState([]);
+  const {cards, setCards} = useTaskContext();
   const [isLoading, setIsLoading] = useState(true);
   const [addErrorGetTasks, setAddErrorGetTasks] = useState(null);
 
@@ -35,7 +36,7 @@ function MainPage() {
           {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
           {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
         </Wrapper>
-        <Outlet />
+        <Outlet setCards={setCards} />
       </>
     );
   

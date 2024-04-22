@@ -9,6 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { paths } from "./lib/paths";
 import ExitPage from "./pages/ExitPage";
 import { NewCardPage } from "./pages/NewCardPage";
+import { TasksProvider } from "./contexts/TasksContext";
 
 
 
@@ -17,7 +18,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path={paths.MAIN} element={<MainPage />}>
+        <Route path={paths.MAIN} element={<TasksProvider><MainPage /></TasksProvider>}>
           <Route
             path={paths.EXIT}
             element={<ExitPage />}

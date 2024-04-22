@@ -1,7 +1,7 @@
 import PopBrowse from "../components/popups/PopBrowse";
 
-const CardPage = ({cards}) => {
-  return <PopBrowse cards={cards} />;
+const CardPage = () => {
+  return <PopBrowse />;
 };
 
 export default CardPage;

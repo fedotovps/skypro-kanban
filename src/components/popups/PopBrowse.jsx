@@ -1,8 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
+import { useTaskContext } from "../../contexts/hooks/useCards";
 
-function PopBrowse({cards}) {
+function PopBrowse() {
+
+  const {cards} = useTaskContext();
   
   const { id } = useParams();
   const indexCard = cards.findIndex(item => item._id === id);
@@ -54,6 +57,7 @@ function PopBrowse({cards}) {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
+                    value={description}
                   ></textarea>
                 </div>
               </form>

@@ -1,81 +1,133 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
 import { useState } from "react";
+import { useUserContext } from "../../contexts/hooks/useUser";
+import { postTask } from "../../lib/api";
+import { useTaskContext } from "../../contexts/hooks/useCards";
+import * as S from "../popups/PopNewCard.styled"
 
 function PopNewCard() {
+
+  const {user} = useUserContext();
+  const {setCards} = useTaskContext();
+  const navigete = useNavigate();
   const [selectedDay, setSelectedDay] = useState();
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
     topic: "",
   });
+
+  const addNewTask = async () => {
+    const taskData = { ...newTask, date:selectedDay};
+    await postTask({...taskData, token: user?.token}).then((response) => {
+      setCards(response.tasks);
+      navigete(-1);
+    }).catch((error) => {
+      console.log(error.message);
+    });
+  }
+
+  // let color;
+  // switch (topic) {
+  //   case "Research":
+  //     color = "_green";
+  //     break;
+  //   case "Web Design":
+  //     color = "_orange";
+  //     break;
+  //   case "Copywriting":
+  //     color = "_purple";
+  //     break;
+  //   default:
+  //     color = "_grey";
+  // }
+
   return (
-    <div className="pop-new-card" id="popNewCard">
-      <div className="pop-new-card__container">
-        <div className="pop-new-card__block">
-          <div className="pop-new-card__content">
-            <h3 className="pop-new-card__ttl">Создание задачи</h3>
-            <a href="#" className="pop-new-card__close">
-              <Link to={paths.MAIN}>&#10006;</Link>
-            </a>
-            <div className="pop-new-card__wrap">
-              <form
-                className="pop-new-card__form form-new"
-                id="formNewCard"
-                action="#"
-              >
-                <div className="form-new__block">
-                  <label htmlFor="formTitle" className="subttl">
+    <S.PopNewCard id="popNewCard">
+      <S.PopNewCardContainer>
+        <S.PopNewCardBlock>
+          <S.PopNewCardContent>
+            <S.PopNewCardTtl>
+              Создание задачи
+            </S.PopNewCardTtl>
+            <Link to={paths.MAIN}>
+              <S.PopNewCardClose>
+                &#10006;
+              </S.PopNewCardClose>
+            </Link>
+            <S.PopNewCardWrap>
+              <S.PopNewCardFormFormNew id="formNewCard" action="#">
+                <S.FormNewBlock>
+                  <S.Subttl htmlFor="formTitle">
                     Название задачи
-                  </label>
-                  <input
-                    className="form-new__input"
-                    type="text"
-                    name="name"
-                    id="formTitle"
-                    placeholder="Введите название задачи..."
-                    autoFocus
-                    onChange={(e) => {setNewTask({...newTask, title: e.target.value})}}
-                  />
-                </div>
-                <div className="form-new__block">
-                  <label htmlFor="textArea" className="subttl">
+                  </S.Subttl>
+                  <S.FormNewInput
+                  type="text"
+                  name="name"
+                  id="formTitle"
+                  placeholder="Введите название задачи..."
+                  autoFocus
+                  onChange={(e) => {setNewTask({...newTask, title: e.target.value})}}>
+                  </S.FormNewInput>
+                </S.FormNewBlock>  
+                <S.FormNewBlock>
+                  <S.Subttl htmlFor="textArea">
                     Описание задачи
-                  </label>
-                  <textarea
-                    className="form-new__area"
-                    name="text"
-                    id="textArea"
-                    placeholder="Введите описание задачи..."
-                    value={newTask}
-                    onChange={(e) => {setNewTask({...newTask, description: e.target.value})}}
-                  ></textarea>
-                </div>
-              </form>
+                  </S.Subttl>
+                  <S.FormNewArea
+                  name="text"
+                  id="textArea"
+                  placeholder="Введите описание задачи..."
+                  onChange={(e) => {setNewTask({...newTask, description: e.target.value})}}>
+                  </S.FormNewArea>
+                </S.FormNewBlock>
+              </S.PopNewCardFormFormNew>
               <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
-            </div>
-            <div className="pop-new-card__categories categories">
-              <p className="categories__p subttl">Категория</p>
-              {/* <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
-              </div> */}
-            </div>
-            <button className="form-new__create _hover01" id="btnCreate">
+            </S.PopNewCardWrap>
+            <S.Categories>
+              <S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
+              <label>
+                Web Design
+                <input type="radio" name="topic" value="Web Design" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
+              </label>
+              <label>
+                Research
+                <input type="radio" name="topic" value="Research" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
+              </label>
+              <label>
+              Copywriting
+                <input type="radio" name="topic" value="Copywriting" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
+              </label>
+              {/* <S.CategoriesThemes>
+                <S.CategoriesThemeOrange>
+                  <S.Orange value={"Web Design"} onClick={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                    Web Design
+                  </S.Orange>
+                </S.CategoriesThemeOrange>
+                {/* <div className="categories__theme _orange _active-category">
+                  
+                </div> 
+                <S.CategoriesThemeGreen>
+                  <S.Green value="Research" onClick={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                    Research
+                  </S.Green>
+                </S.CategoriesThemeGreen>
+                <S.CategoriesThemePurple>
+                  <S.Purple value="Copywriting" onClick={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                    Copywriting
+                  </S.Purple>
+                </S.CategoriesThemePurple>
+              </S.CategoriesThemes> */}
+            </S.Categories>
+            <S.FormNewCreate id="btnCreate" onClick={addNewTask}>
               Создать задачу
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </S.FormNewCreate>
+          </S.PopNewCardContent>
+        </S.PopNewCardBlock>
+      </S.PopNewCardContainer>
+    </S.PopNewCard>
   );
 }
 

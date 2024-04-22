@@ -50,7 +50,7 @@ export async function getTasks(token) {
   return data;
 }
 
-export async function postTask(token, title, topic, status, description, date) {
+export async function postTask({token, title, topic, description, date}) {
   const response = await fetch("https://wedev-api.sky.pro/api/kanban", {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -59,7 +59,6 @@ export async function postTask(token, title, topic, status, description, date) {
     body: JSON.stringify({
       title,
       topic,
-      status,
       description,
       date,
     }),
