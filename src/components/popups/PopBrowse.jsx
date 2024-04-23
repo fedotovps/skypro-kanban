@@ -1,24 +1,37 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import { paths } from "../../lib/paths";
 import { useTaskContext } from "../../contexts/hooks/useCards";
+import { deleteTasks } from "../../lib/api";
+import { useUserContext } from "../../contexts/hooks/useUser";
 
 function PopBrowse() {
 
-  const {cards} = useTaskContext();
+  const {cards, setCards} = useTaskContext();
+  const {user} = useUserContext();
+  const navigate = useNavigate();
   
   const { id } = useParams();
-  const indexCard = cards.findIndex(item => item._id === id);
-  const {date, description, status, title, topic, userId, _id} = cards[indexCard];
+  const indexCard = cards.find(item => item._id === id);
+
+  const clickDeleteTask = async () => {
+    await deleteTasks({id, token: user?.token}).then((response) => { 
+      setCards(response.tasks);
+      navigate(-1);
+    }).catch((error) => {
+      console.log(error.message);
+    })
+  } 
+
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Задача №{id}</h3>
+              <h3 className="pop-browse__ttl">{indexCard?.title}</h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">{topic}</p>
+                <p className="_orange">{indexCard?.topic}</p>
               </div>
             </div>
             <div className="pop-browse__status status">
@@ -28,7 +41,7 @@ function PopBrowse() {
                   <p>Без статуса</p>
                 </div>
                 <div className="status__theme _gray">
-                  <p className="_gray">{status}</p>
+                  <p className="_gray">{indexCard?.status}</p>
                 </div>
                 <div className="status__theme _hide">
                   <p>В работе</p>
@@ -57,7 +70,7 @@ function PopBrowse() {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
-                    value={description}
+                    value={indexCard?.description}
                   ></textarea>
                 </div>
               </form>
@@ -74,8 +87,8 @@ function PopBrowse() {
                 <button className="btn-browse__edit _btn-bor _hover03">
                   <a href="#">Редактировать задачу</a>
                 </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
+                <button onClick={clickDeleteTask} className="btn-browse__delete _btn-bor _hover03">
+                  Удалить задачу
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">

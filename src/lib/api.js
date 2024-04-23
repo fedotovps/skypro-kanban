@@ -71,3 +71,19 @@ export async function postTask({token, title, topic, description, date}) {
   const data = await response.json();
   return data;
 }
+
+export async function deleteTasks({id, token}) {
+  const response = await fetch(`https://wedev-api.sky.pro/api/kanban/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Не удалось удалить задачу")
+  }
+
+  const data = await response.json();
+  return data;
+}
