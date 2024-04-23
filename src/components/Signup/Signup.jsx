@@ -3,8 +3,11 @@ import * as S from "./Signup.styled";
 import { paths } from "../../lib/paths";
 import { useState } from "react";
 import { regUser } from "../../lib/api";
+import { useUserContext } from "../../contexts/hooks/useUser";
 
-function Signup({ login }) {
+function Signup() {
+
+  const {login} = useUserContext();
   const [getFirstName, setGetFirstName] = useState("");
   const [getLogin, setGetLogin] = useState("");
   const [getPassword, setGetPassword] = useState("");
