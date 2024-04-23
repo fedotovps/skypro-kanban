@@ -1,6 +1,25 @@
 import styled from "styled-components";
 import { Hover01 } from "../../style/common.style";
 
+
+
+// let opacityGreen;
+// let opacityOrange;
+// let opacityPurple;
+// switch (props.$opacity) {
+//   case "Research":
+//     opacityGreen = "1";
+//     break;
+//   case "Web Design":
+//     opacityOrange = "1";
+//     break;
+//   case "Copywriting":
+//     opacityPurple = "1";
+//     break;
+//   default:
+//     opacityDefault = "0,5";
+// }
+
 export const PopNewCard = styled.div`
     display: block;
     width: 100%;
@@ -237,4 +256,53 @@ export const FormNewCreate = styled.button`
     float: right;
 
     ${Hover01}
+`;
+
+export const LabelOrange = styled.label`
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    margin-right: 7px;
+    background-color: #ffe4c2;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 10px;
+    color: #ff6d00;
+    opacity: ${(props) => props.$opacity === "Web Design" ? "1" : "0.5"}
+`;
+
+export const LabelGreen = styled.label`
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    margin-right: 7px;
+    background-color: #b4fdd1;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 10px;
+    color: #06b16e;
+    opacity: ${(props) => props.$opacity === "Research" ? "1" : "0.5"}
+`;
+
+export const LabelPurple = styled.label`
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    margin-right: 7px;
+    background-color: #e9d4ff;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 10px;
+    color: #9a48f1;
+    opacity: ${(props) => props.$opacity === "Copywriting" ? "1" : "0.5"}
+`;
+
+export const ModalInputRadio = styled.input`
+    display:none;
 `;

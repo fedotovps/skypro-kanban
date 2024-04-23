@@ -30,7 +30,7 @@ function PopNewCard() {
   }
 
   // let color;
-  // switch (topic) {
+  // switch (newTask.topic) {
   //   case "Research":
   //     color = "_green";
   //     break;
@@ -88,18 +88,21 @@ function PopNewCard() {
             </S.PopNewCardWrap>
             <S.Categories>
               <S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
-              <label>
+              <S.LabelOrange $opacity={newTask.topic}>
                 Web Design
-                <input type="radio" name="topic" value="Web Design" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
-              </label>
-              <label>
+                <S.ModalInputRadio type="radio" name="topic" value="Web Design" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                </S.ModalInputRadio>
+              </S.LabelOrange>
+              <S.LabelGreen $opacity={newTask.topic}>
                 Research
-                <input type="radio" name="topic" value="Research" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
-              </label>
-              <label>
+                <S.ModalInputRadio type="radio" name="topic" value="Research" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                </S.ModalInputRadio>
+              </S.LabelGreen>
+              <S.LabelPurple $opacity={newTask.topic}>
               Copywriting
-                <input type="radio" name="topic" value="Copywriting" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}} />
-              </label>
+                <S.ModalInputRadio type="radio" name="topic" value="Copywriting" onChange={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
+                </S.ModalInputRadio>
+              </S.LabelPurple>
               {/* <S.CategoriesThemes>
                 <S.CategoriesThemeOrange>
                   <S.Orange value={"Web Design"} onClick={(e) => {setNewTask({...newTask, topic: e.target.value})}}>
