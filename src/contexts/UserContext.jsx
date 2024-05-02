@@ -30,7 +30,6 @@ export const UserProvider = ({children}) => {
       localStorage.removeItem("user")
       navigete(paths.SIGN_IN);
       setUser(null);
-      //setCards([]);
     }
 
     return (

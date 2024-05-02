@@ -4,7 +4,7 @@ import { Hover01, Hover02, Hover03 } from "../../style/common.style";
 export const Header = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.backgroundBlock};
 `;
 
 export const HeaderBlock = styled.div`
@@ -57,10 +57,10 @@ export const HeaderBtnExit = styled.button`
   background: transparent;
   color: #565eef;
   border-radius: 4px;
-  border: 1px solid #565eef;
+  border: 1px solid ${(props) => props.theme.HeaderUserColor};
 
   & a {
-    color: #565eef;
+    color: ${(props) => props.theme.HeaderUserColor};
   }
   ${Hover03}
 `;
@@ -73,7 +73,7 @@ export const HeaderUser = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565eef;
+  color: ${(props) => props.theme.HeaderUserColor};
 
   &::after {
     content: "";
@@ -81,13 +81,12 @@ export const HeaderUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565eef;
-    border-bottom: 1.9px solid #565eef;
+    border-left: 1.9px solid ${(props) => props.theme.HeaderUserColor};
+    border-bottom: 1.9px solid ${(props) => props.theme.HeaderUserColor};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
   }
-  ${Hover02}
 `;
 
 export const HeaderPopUserSet = styled.div`
@@ -99,8 +98,8 @@ export const HeaderPopUserSet = styled.div`
   height: 205px;
   border-radius: 10px;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
-  background: #fff;
-  box-shadow: 0px 10px 39px 0px rgba(26, 56, 101, 0.21);
+  background: ${(props) => props.theme.backgroundBlock};
+  box-shadow: ${(props) => props.theme.boxShadow};
   padding: 34px;
   text-align: center;
   z-index: 2;
@@ -114,7 +113,7 @@ export const HeaderPopUserSet = styled.div`
 `;
 
 export const HeaderPopUserSetName = styled.p`
-  color: #000;
+  color: ${(props) => props.theme.color};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -137,7 +136,7 @@ export const HeaderPopUserSetTheme = styled.div`
   margin-bottom: 30px;
 
   & p {
-    color: #000;
+    color: ${(props) => props.theme.color};
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.14px;

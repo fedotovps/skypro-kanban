@@ -59,7 +59,6 @@ function PopNewCard() {
     }).catch((error) => {
       console.log(error.message);
     });
-
   }
 
   return (
@@ -104,7 +103,10 @@ function PopNewCard() {
                   </S.FormNewArea>
                 </S.FormNewBlock>
               </S.PopNewCardFormFormNew>
-              <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+              <S.FormNewBlock>
+                <S.CategoriesPSubttl2>Даты</S.CategoriesPSubttl2>
+                <Calendar selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+              </S.FormNewBlock>
             </S.PopNewCardWrap>
             <S.Categories>
               <S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
