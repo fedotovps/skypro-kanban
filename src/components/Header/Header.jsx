@@ -4,28 +4,17 @@ import { Container } from "../../style/common.style.js";
 import { Link } from "react-router-dom";
 import { paths } from "../../lib/paths.js";
 import { useUserContext } from "../../contexts/hooks/useUser.jsx";
+import { useThemesContext } from "../../contexts/hooks/useTheme.jsx";
 
-function Header({ setCards, cards }) {
+function Header() {
 
+  const {theme, handleTheme} = useThemesContext();
   const {user} = useUserContext();
-
   const [toggle, setToggel] = useState(false);
 
   const handleToggle = () => {
     setToggel((prevState) => !prevState);
-    console.log(toggle);
   };
-
-  function addCard() {
-    const newCard = {
-      id: cards.length + 1,
-      topic: "Research",
-      title: "Новая задача",
-      date: "24.03.2024",
-      status: "Без статуса",
-    };
-    setCards([...cards, newCard]);
-  }
 
   return (
     <S.Header>
@@ -33,19 +22,10 @@ function Header({ setCards, cards }) {
         <S.HeaderBlock>
           <S.HeaderLogo>
             <Link to="/">
-              <img src="images/logo.png" alt="SKYPRO" />
+              {theme ? <img src="images/logo.png" alt="SKYPRO" /> : <img src="images/logo_dark.png" alt="SKYPRO" />}
             </Link>
           </S.HeaderLogo>
-          {/*<S.HeaderLogo>
-            <a href="" target="_self">
-              <img src="images/logo_dark.png" alt="SKYPRO" />
-            </a>
-          </S.HeaderLogo>*/}
           <S.HeaderNav>
-            {/*<Button $testprops $size="medium">
-                Click
-              </Button>
-              <DangerButton>Хелп</DangerButton>*/}
             <S.HeaderBtn id="btnMainNew">
               <Link to={paths.NEWCARD}>Создать новую задачу</Link>
             </S.HeaderBtn>
@@ -59,7 +39,7 @@ function Header({ setCards, cards }) {
                 </S.HeaderPopUserSetMail>
                 <S.HeaderPopUserSetTheme>
                   <p>Темная тема</p>
-                  <input type="checkbox" className="checkbox" name="checkbox" />
+                  <input type="checkbox" className="checkbox" checked={!theme ? "checked" : ""} name="checkbox" onChange={handleTheme} />
                 </S.HeaderPopUserSetTheme>
                 <S.HeaderBtnExit>
                   <Link to="/exit">Выйти</Link>

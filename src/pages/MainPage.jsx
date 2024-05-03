@@ -1,4 +1,3 @@
-import "../App.css";
 import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import { GlobalStyle, Wrapper } from "../components/Global/Global.styled";
@@ -19,7 +18,6 @@ function MainPage() {
   useEffect(() => {
     getTasks(user.token).then((responce) => {
       setCards(responce.tasks);
-      console.log(cards);
     })
     .catch((error) => {
       setAddErrorGetTasks(error.message);
@@ -30,13 +28,13 @@ function MainPage() {
 
     return (    
       <>
-        <GlobalStyle />
-        <Wrapper>
-          <Header setCards={setCards} cards={cards} />
-          {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
-          {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
-        </Wrapper>
-        <Outlet setCards={setCards} />
+          <GlobalStyle />
+          <Wrapper>
+            <Header />
+            {isLoading ? <span>Данные загружаются</span> : <Main cards={cards} />}
+            {addErrorGetTasks ? <span style={{color: "red"}}>Не удалось загрузить данные, попробуйте позже</span> : null}
+          </Wrapper>
+          <Outlet setCards={setCards} />
       </>
     );
   

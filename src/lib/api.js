@@ -87,3 +87,26 @@ export async function deleteTasks({id, token}) {
   const data = await response.json();
   return data;
 }
+
+export async function editTasks({title, topic, status, description, date, id, token}) {
+  const response = await fetch(`https://wedev-api.sky.pro/api/kanban/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "PUT",
+    body: JSON.stringify({
+      title,
+      topic,
+      status,
+      description,
+      date,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Не удалось изменить задачу")
+  }
+
+  const data = await response.json();
+  return data;
+}

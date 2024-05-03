@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as S from "./Card.styled";
+import { formatDate } from "../../lib/formatDate";
 
 function Card({ topic, title, date, _id }) {
 
@@ -63,7 +64,7 @@ function Card({ topic, title, date, _id }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{date}</p>
+            <p>{formatDate(date)}</p>
           </S.CardDate>
         </S.CardContent>
       </S.CardCard>

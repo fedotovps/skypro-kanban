@@ -23,6 +23,7 @@ export const Hover03 = css`
   &:hover {
     background-color: #33399b;
     color: #ffffff;
+    border: 1px solid #33399b;
   }
 
   &:hover a {

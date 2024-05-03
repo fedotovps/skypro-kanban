@@ -2,20 +2,20 @@ import styled from "styled-components";
 
 export const topicStyles = {
   _purple: {
-    backgroundColor: "#e9d4ff",
-    color: "#9a48f1",
+    backgroundColor: (props) => props.theme.backgroundPurple,
+    color: (props) => props.theme.colorPurple,
   },
   _orange: {
-    backgroundColor: "#ffe4c2",
-    color: "#ff6d00",
+    backgroundColor: (props) => props.theme.backgroundOrange,
+    color: (props) => props.theme.colorOrange,
   },
   _green: {
-    backgroundColor: "#b4fdd1",
-    color: "#06b16e",
+    backgroundColor: (props) => props.theme.backgroundGreen,
+    color: (props) => props.theme.colorGreen,
   },
   _gray: {
-    backgroundColor: "#94a6be",
-    color: "#ffffff",
+    backgroundColor: (props) => props.theme.backgroundGrey,
+    color: (props) => props.theme.colorGrey,
   },
 };
 
@@ -28,7 +28,7 @@ export const CardItem = styled.div`
 export const CardCard = styled.div`
   width: 220px;
   height: 130px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.backgroundBlock};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@ export const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: #000000;
+  color: ${(props) => props.theme.color};
   margin-bottom: 10px;
 `;
 
